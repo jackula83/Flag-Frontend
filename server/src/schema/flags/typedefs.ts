@@ -1,26 +1,26 @@
 import { gql } from 'apollo-server';
-import { entityTypeDef } from '../common/type';
+import { entityTypeDef } from '../common/typedef';
 
-export const typeDefs = gql`
-
-  type ServeValue {
-    state: Boolean
-  }
-
-  type Flag {
+const flagTypeDefs = `
     name: String
     description: String
     alias: String
     isEnabled: Boolean
     defaultServeValue: ServeValue
+    ${entityTypeDef}
+  `
+
+export const typeDefs = `
+  type ServeValue {
+    state: Boolean
   }
 
-  extend type Flag {
-    ${entityTypeDef}
+  type Flag {
+    ${flagTypeDefs}
   }
 
   input FlagSaveDataInput {
-    flag: Flag
+    ${flagTypeDefs}
   }
 
   extend type Query {

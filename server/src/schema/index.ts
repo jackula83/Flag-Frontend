@@ -1,8 +1,8 @@
 import { gql } from 'apollo-server'
-import { typeDefs as flagTypes } from './flags/type';
+import { typeDefs as flagTypes } from './flags/typedefs';
 
 export const typeDefs = gql`
-  # Query, Mutation to be "extend" by specific type defs
+  # Base Query and Mutation to be extended by specific type defs
   type Query
   type Mutation
 
