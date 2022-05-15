@@ -1,26 +1,39 @@
-import { gql } from 'apollo-server';
 import { entityTypeDef } from '../common/typedef';
 
-const flagTypeDefs = `
+enum SchemaType {
+  Type,
+  Input
+}
+
+const serveValueDefBody = () => `
+  state: Boolean
+`
+
+const flagDefBody = (schemaType: SchemaType) => 
+  `
     name: String
     description: String
     alias: String
     isEnabled: Boolean
-    defaultServeValue: ServeValue
+    defaultServeValue: ${schemaType == SchemaType.Type ? 'ServeValue' : 'ServeValueInput'}
     ${entityTypeDef}
   `
 
 export const typeDefs = `
   type ServeValue {
-    state: Boolean
+    ${serveValueDefBody()}
   }
 
   type Flag {
-    ${flagTypeDefs}
+    ${flagDefBody(SchemaType.Type)}
+  }
+
+  input ServeValueInput {
+    ${serveValueDefBody()}
   }
 
   input FlagSaveDataInput {
-    ${flagTypeDefs}
+    ${flagDefBody(SchemaType.Input)}
   }
 
   extend type Query {

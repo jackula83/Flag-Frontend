@@ -1,5 +1,10 @@
 export type Nullable<T> = T | undefined | null
 
+export type EntityModel<T> = {
+  Items: T[],
+  Item: T
+}
+
 export interface AggregateRoot {
   id: number,
   uuid: string,
@@ -24,25 +29,18 @@ export interface Flag extends AggregateRoot {
 
 // set up dependency injection components
 export interface EntityService {
-  enumerate(): Flag[];
-  get(id: number): Nullable<Flag>;
+  enumerate(): Promise<Flag[]>;
+  get(id: number): Promise<Nullable<Flag>>;
 }
 
 export interface HttpService {
-  get<TResponse>(id: number): Nullable<TResponse>
-  enumerate<TResponse>(): TResponse[]
+  get<TResponse>(id: number): Promise<Nullable<TResponse>>
+  enumerate<TResponse>(): Promise<TResponse>
   // post<TResponse>(body: string): Nullable<TResponse>
   // delete<TResponse>(body: string): Nullable<TResponse>
 }
 
-export interface Component {
-  HttpService: symbol,
-  EntityService: symbol
+export interface LogService {
+  info(message: string): void
+  error(error: (Error | string)): void
 }
-
-const COMPONENT: Component = {
-  HttpService: Symbol.for(nameof<HttpService>()),
-  EntityService: Symbol.for(nameof<EntityService>())
-}
-
-export { COMPONENT }

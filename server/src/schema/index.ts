@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server'
+import { FlagQuery } from './flags/query';
 import { typeDefs as flagTypes } from './flags/typedefs';
 
 export const typeDefs = gql`
@@ -11,6 +12,8 @@ export const typeDefs = gql`
 `;
 
 export const resolvers = {
-  Query: {},
+  Query: {
+    ...FlagQuery
+  },
   Mutation: {}
 };

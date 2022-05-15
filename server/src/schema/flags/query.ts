@@ -1,5 +1,5 @@
-// export const FlagQuery = {
-//   flag: (parent, args) => {
-
-//   }
-// }
+export const FlagQuery = {
+  flags: () => {
+    
+  }
+}
