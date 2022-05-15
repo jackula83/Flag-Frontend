@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/node';
 import { injectable } from 'inversify';
-import { ConsoleStyle } from "../common/console";
+import { ConsoleStyle } from "../common/consoleStyle";
 import { LogService } from "../common/types";
 
 @injectable()

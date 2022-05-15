@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { inject, injectable } from 'inversify';
 import { COMPONENT } from '../common/component';
 import { HttpService, Nullable } from '../common/types';
-import { LogService } from './../common/types';
+import { LogService } from '../common/types';
 
 @injectable()
 export class AxiosHttpService implements HttpService {
